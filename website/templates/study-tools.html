@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Notes{% endblock %}
+{% block css %}
+<link href="{{ url_for('static', filename='css/notes.css') }}" rel="stylesheet">
+
+<style>
+  body{
+    background-color: #F3E5F5;
+  }
+  .container#content{
+    background-color: #f3f3f3;
+    min-height: 80vh;
+  }
+</style>
+
+{% endblock %}
+
+{% block content %}
+    <!-- details page -->
+<section class="pt-3">
+    <div class="container shadow section-custom rounded" id="content">
+      <div class="row">
+        <!-- sidebar -->
+        <div class="col-lg-3">
+          <ul class="sidenav">
+            <li class="sidelist parent active">
+              <a href="{{ url_for('views.studytools')}}">Notes</a>
+              <ul>
+                <li class="sidelist item">
+                  <a class="list-group-item list-group-item-action custom-green-300"
+                href="{{ url_for('views.add_note')}}"><i class="bi bi-plus-lg"></i>
+                  Add New Note
+                  </a>
+                {% for note in user.notes %}
+                <li class="sidelist item">
+                  <a href="{{ url_for('views.show_notes', note_id=note.id) }}" data-note-id="{{ note.id }}">{{ note.title }}</a>
+                {% endfor %}
+                </li>
+              </ul>
+            </li>
+        </div>
+  
+        <!-- body -->
+        <div class="col-lg-8">
+          <div class="px-lg-3 px-3">
+            <!-- main content -->
+          {% if current_note %}
+            <h3 class="font-weight-medium" id="note-title">{{ current_note.title }}
+              <a href="{{ url_for('views.edit_note', note_id=current_note.id) }}"><i class="bi bi-pencil-fill float-end"></i></a></h3>
+            <div class="content" id="note-content">
+              <pre class="text-break">{{ current_note.note_data }}</pre>
+              <!-- navigation -->
+            </div>
+          {% else %}
+            <style>
+              #cloud{
+                  width: 200px;
+                  height: auto;
+                  text-align: center;
+                  padding-top: 50px
+              }
+            </style>
+            <figure class="figure mx-auto d-block">
+              <img src="{{ url_for('static', filename='images/cloud.png') }}" class="figure-img img-fluid mx-auto d-block" alt="cloud" id="cloud">
+              <figcaption class="figure-caption text-center">Select a note from the sidebar to view...</figcaption>
+            </figure>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+{% endblock %}

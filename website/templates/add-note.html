@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Add New Note{% endblock %}
+{% block css %}
+<link href="{{ url_for('static', filename='css/notes.css') }}" rel="stylesheet">
+<style>
+    body{
+        background-color: #F3E5F5;
+    }
+    .container#content{
+        background-color: #f3f3f3;
+        min-height: 80vh;
+        max-height: 90vh;
+    }
+</style>
+{% endblock %}
+
+{% block content %} 
+
+<section class="pt-3">
+  <div class="container shadow section-custom rounded" id="content">
+    <div class="row">
+      <!-- sidebar -->
+      <div class="col-lg-3">
+        <ul class="sidenav">
+          <li title="Notes" class="sidelist parent active">
+            <a href="{{ url_for('views.studytools')}}">Notes</a>
+            <ul>
+              <li class="sidelist item">
+                <a class="list-group-item list-group-item-action custom-green-300"
+              href="{{ url_for('views.add_note')}}"><i class="bi bi-plus-lg"></i>
+                Add New Note
+                </a>
+              {% for note in user.notes %}
+              <li class="sidelist item">
+                <a href="{{ url_for('views.show_notes', note_id=note.id) }}" data-note-id="{{ note.id }}">{{ note.title }}
+                </a>
+              {% endfor %}
+              </li>
+            </ul>
+          </li>
+      </div>
+
+      <!-- body -->
+      <div class="col-lg-8">
+          <!-- main content -->
+        <form method="POST">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+              <h5 class="font-weight-medium">Add Note</h5>
+              <button type="submit" class="btn btn-success" id="submitBtn">Save</button>
+          </div>
+          
+          <div class="content">
+              <div class="container-fluid mt-3">
+                  <label for="title" class="form-label">
+                      Title</label>
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Enter title here..." autofocus="true"> <br/> 
+                  
+                  <textarea name="note" id="note" class="form-control" placeholder="Write here..."></textarea> <br/>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>    
+
+{% endblock %}

@@ -1,0 +1,13 @@
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode a {
+    color: #bb86fc;
+}
+
+body.dark-mode .navbar, body.dark-mode .footer-menu {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}

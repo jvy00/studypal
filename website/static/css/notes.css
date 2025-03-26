@@ -1,0 +1,61 @@
+textarea#note{
+    min-height: 55vh;
+}
+
+textarea{
+    height: 300px;
+
+}
+#submitBtn{
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+.sidenav .sidelist.item {
+    border-bottom: 1px solid #D7BDE2;
+    padding: 10px;
+  }
+
+.sidenav .sidelist.item:hover {
+    background-color: #F3E5F5;
+    border-color: #6A0DAD;
+    transition: 0.3s ease; 
+}
+
+
+.sidenav .sidelist.item a {
+    text-decoration: none;
+    color: #4A235A;
+    display: block;
+    font-size: 16px;
+    font-weight: 5500;
+    word-wrap: break-word; /* ensures long words break */
+    overflow-wrap: break-word; /* ensures text wraps within the container */
+    white-space: normal; /* allows text to wrap to the next line */
+}
+
+.sidenav .sidelist a:hover {
+    color: #6A0DAD;
+}
+
+#note-content {
+    min-height: 65vh;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+#note-title{
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #6A0DAD;
+    padding-bottom: 15px;
+    font-size: 25px;
+}
+#note-content pre {
+    font-family: Verdana, sans-serif;
+    font-size: 17px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: transparent;
+}
