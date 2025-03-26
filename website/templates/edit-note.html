@@ -55,7 +55,7 @@
                       Title</label>
                   <input type="text" class="form-control" id="title" name="title" value="{{current_note.title}}" autofocus="true"> <br/> 
                   
-                  <textarea name="note" id="note" class="form-control" placeholder="Write here...">{{current_note.note_data}}</textarea> <br/>
+                  <textarea name="note" id="note" class="form-control" placeholder="Write here...">{{current_note.note_data | safe}}</textarea> <br/>
               </div>
             {% endif %}
           </div>

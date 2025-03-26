@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Notes{% endblock %}
+
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+    <form action="/save" method="POST">
+        <label for="title" class="form-label">
+            Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="title" autofocus="true"> <br/> 
+        <textarea id="myEditor" name="editor_content"></textarea>
+        <button type="submit">Save</button>
+    </form>
+
+    <script type="text/javascript" 
+    src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
+
+{% for note in user.notes %}
+    <div>
+        {{ note.note_data | safe }}
+    </div>
+{% endfor %}
+
+<script>
+    new FroalaEditor('#myEditor', {
+        saveParam: 'content',
+        saveURL: '/save',
+        saveMethod: 'POST',
+        saveParams: {id:'my_editor'}
+    });
+</script>
+
+{% endblock %}
+

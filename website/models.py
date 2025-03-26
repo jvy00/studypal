@@ -8,6 +8,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(150))
     password = db.Column(db.String(150))
     notes = db.relationship('Note')
+    flashcards = db.relationship('Flashcard')
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,6 +19,7 @@ class Note(db.Model):
 
 class Flashcard(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100))
     question = db.Column(db.String(100), nullable=False)
     answer = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from flask_migrate import Migrate #for adding new columns without losing data
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -11,6 +12,7 @@ def create_app():
     app.config['SECRET_KEY'] = 'hwangyejiii'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
+    migrate = Migrate(app, db) #new
 
     from .views import views
     from .auth import auth

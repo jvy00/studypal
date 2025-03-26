@@ -48,7 +48,7 @@
             <h3 class="font-weight-medium" id="note-title">{{ current_note.title }}
               <a href="{{ url_for('views.edit_note', note_id=current_note.id) }}"><i class="bi bi-pencil-fill float-end"></i></a></h3>
             <div class="content" id="note-content">
-              <pre class="text-break">{{ current_note.note_data }}</pre>
+              <pre class="text-break">{{ current_note.note_data | safe }}</pre>
               <!-- navigation -->
             </div>
           {% else %}

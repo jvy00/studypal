@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Flashcards{% endblock %}
+{% block css %}
+<link href="{{ url_for('static', filename='css/notes.css') }}" rel="stylesheet">
+
+
+<style>
+    body{
+        background-color: #F3E5F5;
+    }
+    .container-fluid#content{
+        background-color: #f3f3f3;
+        min-height: 90vh;
+    }
+
+    .flashcard {
+        width: 370px;
+        height: 200px;
+        margin: 10px;
+        padding: 20px;
+        border: 1px solid #b9b9b9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        display: inline-block;
+    }
+    .flashcard .question {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .flashcard .answer {
+        font-size: 16px;
+        display: none;
+    }
+    .flashcard:hover .answer {
+        display: block;
+    }
+    </style>
+
+{% endblock %}
+{% block content %}
+
+<section class="pt-3">
+    <div class="container-fluid shadow section-custom rounded" id="content">
+      <div class="row">
+        <!-- sidebar -->
+        <div class="col-lg-3">
+          <ul class="sidenav">
+            <li class="sidelist parent active">
+              <a href="{{ url_for('views.studytools')}}">Notes</a>
+              <ul>
+                <li class="sidelist item">
+                  <a class="list-group-item list-group-item-action custom-green-300"
+                href="{{ url_for('views.flashcards')}}"><i class="bi bi-plus-lg"></i>
+                  Create New Flashcard
+                  </a>
+                {% for flashcard in user.flashcards %}
+                <li class="sidelist item">
+                  <a href="{{ url_for('views.flashcards', id=flashcard.id) }}">{{ flashcard.question }}</a>
+                {% endfor %}
+                </li>
+              </ul>
+            </li>
+        </div>
+  
+        <!-- body -->
+        <div class="col-lg-8">
+          <div class="px-lg-3 px-3">
+            <!-- main content -->
+            <h1>Flashcards</h1>
+            <div class="content flashcards-container" >
+                {% for flashcard in flashcards %}
+                <div class="flashcard">
+                    <div class="question">{{ flashcard.question }}</div>
+                    <div class="answer">{{ flashcard.answer }}</div>
+                </div>
+                {% endfor %}
+              <!-- add flashcards -->
+
+                <form method="POST">
+                    <input type="text" id="question" name="question" placeholder="Question">
+                    <input type="text" id="answer" name="answer" placeholder="Answer">
+                    <button type="submit">Add Flashcard</button>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

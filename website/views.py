@@ -1,7 +1,7 @@
 from flask import Blueprint, abort, redirect, render_template, request, flash, jsonify, url_for
 from flask_login import login_required, current_user
 from . import db
-from .models import User, Note
+from .models import User, Note, Flashcard
 import json
 
 views = Blueprint('views', __name__)
@@ -92,4 +92,99 @@ def edit_note(note_id):
     return render_template("edit-note.html", user=current_user, notes=notes_list, current_note=note)     #this will render the edit_note.html and it will pass those variables to that html
 
 
+@views.route('study-tools/notes/delete/<int:note_id>', methods=['GET'])
+def delete_note(note_id):
+    note = Note.query.get_or_404(note_id)
+    db.session.delete(note)
+    db.session.commit()
+    flash('Note Deleted!', category='success')
+    return redirect(url_for('views.studytools'))
 
+
+@views.route('/flashcards', methods=['GET'])
+def flashcards():
+    flashcards = Flashcard.query.all()
+    return render_template('flashcards.html', flashcards=flashcards, user=current_user)
+
+@views.route('/flashcards', methods=['POST'])
+def add_flashcard():
+    if request.method == "POST":
+        question = request.form.get('question')
+        answer = request.form.get('answer')
+
+        new_flashcard = Flashcard(question=question, answer=answer, user_id=current_user.id)
+        db.session.add(new_flashcard)
+        db.session.commit()
+        flash('Flashcard saved!', category='success')
+        return redirect(url_for('views.flashcards'))
+    
+    return render_template("flashcards.html", user=current_user)
+
+@views.route('/flashcards/edit/<int:id>', methods=['GET', 'POST'])
+def update_flashcard(id):
+    flashcard = Flashcard.query.get_or_404(id)
+
+    if not flashcard:
+        flash('Note not found', category='error')
+        return redirect(url_for('views.flashcards'))
+    
+    if flashcard.user_id != current_user.id:
+        flash('You do not have permission to edit this note', category='error')
+        return redirect(url_for('views.flashcards'))
+    
+    if request.method == "POST":
+        edit_fc_answer = request.form.get('answer')
+        edit_fc_question = request.form.get('question')
+
+        flashcard.answer = edit_fc_answer
+        flashcard.question = edit_fc_question
+        db.session.commit()
+        flash('Changes saved successfully!', category='success')
+        return redirect(url_for('views.flashcards'))
+    
+    return render_template("flashcards.html", user=current_user)
+    
+    
+    # flashcard.question = request.json['question']
+    # flashcard.answer = request.json['answer']
+    # db.session.commit()
+    # return jsonify({"message": "Flashcard updated successfully"})
+
+
+# Route to delete a flashcard
+@views.route('/flashcards/delete/<int:id>', methods=['GET'])
+def delete_flashcard(id):
+    flashcard = Flashcard.query.get_or_404(id)
+    db.session.delete(flashcard)
+    db.session.commit()
+    flash('Flashcard Deleted!', category='success')
+    return redirect(url_for('views.flashcards'))
+
+
+@views.route('/calendar')
+def calendar():
+    return render_template("calendar.html", user=current_user)
+
+
+@views.route('/view', methods=['GET'])
+def view_content():
+    notes = Note.query.all()
+    return render_template('view_notes.html', notes=notes, user=current_user)
+
+@views.route('/save', methods=['POST'])
+def save_content():
+    if request.method == "POST":
+        title = request.form.get('title')
+        content = request.form.get('editor_content')
+
+        if not content:
+            flash('..It\'s empty?', category='error')
+
+        elif not title:
+            flash('Please add a title to your note.', category='error')
+
+        else:
+            note = Note(title=title, note_data=content, user_id=current_user.id)
+            db.session.add(note)
+            db.session.commit()
+            return redirect(url_for('views.view_content'))
