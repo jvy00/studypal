@@ -96,4 +96,19 @@ def edit_note(note_id):
     return render_template("edit-note.html", user=current_user, notes=notes_list, current_note=note)     #this will render the edit_note.html and it will pass those variables to that html
 
 
+@views.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('s')  # get the search query from the URL parameter
+    results = []
 
+    if query and current_user.is_authenticated:
+        # search for notes containing the query
+        results = Note.query.filter(
+            (Note.title.ilike(f"%{query}%")) | (Note.note_data.ilike(f"%{query}%"))
+        ).filter_by(user_id=current_user.id).all()
+    
+    elif not current_user.is_authenticated:
+        flash('You need to be logged in to search notes', category='error')
+        return redirect(url_for('auth.login'))
+
+    return render_template('search.html', query=query, results=results, user=current_user)

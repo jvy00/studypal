@@ -5,6 +5,16 @@
   <!-- Main CSS File -->
   <link href="{{ url_for('static', filename='css/coming-soon.css') }}" rel="stylesheet">
 
+  <style>
+    body {
+      background: ("{{ url_for('static', filename='images/bg.jpg') }}") top center no-repeat;
+    }
+    .footer-menu, .text-dark {
+      color: #fff !important;
+    }
+
+  </style>
+
 
 
   <!-- =======================================================
@@ -42,7 +52,7 @@
               <h4>Seconds</h4>
             </div>
           </div>
-
+      <!--
           <div class="col-lg-5 hero-newsletter">
             <p>Subscribe now to get the latest updates!</p>
             <form action="forms/newsletter.php" method="post" class="php-email-form">
@@ -51,7 +61,7 @@
               <div class="error-message"></div>
               <div class="sent-message">Your subscription request has been sent. Thank you!</div>
             </form>
-          </div>
+          </div>     -->
         </div>
       </div>
 

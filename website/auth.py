@@ -34,7 +34,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('Thank you for coming!', category='success')
+    flash('You have been successfully logged out..', category='success')
     return redirect(url_for('auth.login'))
 
 @auth.route('/signup', methods=['GET', 'POST'])

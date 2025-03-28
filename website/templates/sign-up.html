@@ -10,10 +10,10 @@
 <section class="p-3 p-md-4 p-xl-5">
     <div class="container signup-card card">
       <div class="row">
-        <div class="col-12 col-md-6 bsb-tpl-bg-platinum ">
+        <div class="col-12 col-md-6">
           <div class="d-flex flex-column justify-content-between h-100 p-3 p-md-4 p-xl-5">
             <h3 class="m-0">Welcome!</h3>
-            <img class="img-fluid rounded mx-auto my-4" loading="lazy" src="../static/images/logo.png" width="245" height="80" alt="BootstrapBrain Logo">
+            <img src="{{ url_for('static', filename='images/study.png') }}" class="img-fluid" alt="Welcome">
             <p class="mb-0">Not a member yet? <a href="{{ url_for('auth.signup') }}" class="link-secondary text-decoration-none">Sign up now</a></p>
           </div>
         </div>

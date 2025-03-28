@@ -16,8 +16,8 @@
     <link href="{{ url_for('static', filename='css/darkmode.css') }}" rel="stylesheet">
 
     <!--Favicon-->
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/lf.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='images/lf.ico') }}" type="image/x-icon">
     
     {% block css %}{% endblock %}
 
@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-lg">
           <a class="navbar-brand text-light" href="{{ url_for('views.home') }}">
             <!-- <img src="/" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
-            <i class="bi bi-chat-square-heart" style="font-size: 30px;"></i>
+            <i class="bi bi-clipboard-heart" style="font-size: 30px;"></i>
             StudyPal
           </a>
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-expanded="false">
@@ -36,27 +36,20 @@
           </button>
           
           <div class="collapse navbar-collapse" id="navigation">
-            <ul class="navbar-nav mx-auto align-items-center">
+            <ul class="navbar-nav ms-auto align-items-center">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('views.home') }}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('views.studytools') }}">Study Tools</a>
+                <a class="nav-link" href="#studytools">Study Tools</a>
               </li>
-              {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="search.html">Search Page</a>
-              </li>
-            </ul>
 
-            <!-- Right-aligned nav items -->
-            <ul class="navbar-nav ms-auto align-items-center">
+              {% if user.is_authenticated %}
               <li class="nav-item dropdown list-unstyled">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform:none">{{user.username}}</a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#!">Account</a>
-                  <a class="dropdown-item" href="#!">Settings</a>
-                  <div class="dropdown-divider"></div>
+                  <!-- <a class="dropdown-item" href="#!">Account</a>
+                  <div class="dropdown-divider"></div> -->
                   <a class="dropdown-item" id="logout" href="/logout">Logout</a>
                 </ul>
               </li>
@@ -107,7 +100,7 @@
           <div class="py-4 text-center">
             <div class="mb-4 mb-lg-0">
               <a class="navbar-brand" href="{{ url_for('views.home') }}">
-                <i class="bi bi-chat-square-heart" style="font-size: 30px;"></i>
+                <i class="bi bi-clipboard-heart" style="font-size: 30px;"></i>
                   <h3>StudyPal</h3>
                <!-- <img class="img-fluid" src="{{ url_for('static', filename='/images/logo.png') }}" alt="StudyPal"> -->
               </a>
@@ -137,7 +130,7 @@
             // apply dark mode if saved in localStorage
             if (localStorage.getItem('darkMode') === 'enabled') {
                 body.classList.add('dark-mode');
-                icon.className = 'bi-moon-fill'
+                icon.className = 'bi-moon-stars-fill'
             }
     
             toggleDark.addEventListener('click', function () {
