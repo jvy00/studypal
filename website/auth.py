@@ -37,8 +37,8 @@ def logout():
     flash('Thank you for coming!', category='success')
     return redirect(url_for('auth.login'))
 
-@auth.route('/register', methods=['GET', 'POST'])
-def register():
+@auth.route('/signup', methods=['GET', 'POST'])
+def signup():
     if current_user.is_authenticated:
         return redirect(url_for('views.home'))
 
@@ -73,4 +73,4 @@ def register():
             flash('Account created successfully!', category='success')
             return redirect(url_for('views.home'))
 
-    return render_template("register.html", user=current_user)
+    return render_template("sign-up.html", user=current_user)

@@ -14,7 +14,11 @@ def home():
 def studytools():
     return render_template("study-tools.html", user=current_user)
 
+@views.route('/coming-soon')
+def comingsoon():
+    return render_template("coming-soon.html", user=current_user)
 
+# route for notes (includes add, edit, delete and view notes)
 @views.route('/study-tools/notes/<int:note_id>', methods=['GET', 'POST'])
 @login_required
 def show_notes(note_id):

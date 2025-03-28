@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Coming Soon{% endblock %}
+{% block css %}
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='css/coming-soon.css') }}" rel="stylesheet">
+
+
+
+  <!-- =======================================================
+  * Template Name: Maundy
+  * Template URL: https://bootstrapmade.com/maundy-free-coming-soon-bootstrap-theme/
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  
+{% endblock %}
+{% block content %}
+  <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+      <div class="container text-center">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h1>StudyPal<br></h1>
+            <p>We are still working on this feature. Stay tuned for updates!</p>
+          </div>
+          <div class="countdown d-flex justify-content-center" data-count="2025/5/26">
+            <div>
+              <h3 class="count-days">482</h3>
+              <h4>Days</h4>
+            </div>
+            <div>
+              <h3 class="count-hours">6</h3>
+              <h4>Hours</h4>
+            </div>
+            <div>
+              <h3 class="count-minutes">49</h3>
+              <h4>Minutes</h4>
+            </div>
+            <div>
+              <h3 class="count-seconds">21</h3>
+              <h4>Seconds</h4>
+            </div>
+          </div>
+
+          <div class="col-lg-5 hero-newsletter">
+            <p>Subscribe now to get the latest updates!</p>
+            <form action="forms/newsletter.php" method="post" class="php-email-form">
+              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+
+  </main>
+
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Main JS File -->
+  <script src="{{ url_for('static', filename='coming-soon.js') }}"></script>
+  
+{% endblock %}

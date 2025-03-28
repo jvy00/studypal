@@ -22,6 +22,8 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: #333;
+  letter-spacing: 0.3px;
+
 }
 
 p, .paragraph {
@@ -45,8 +47,8 @@ h1, .h1 {
 }
 @media (max-width: 575px) {
   h1, .h1 {
-    font-size: 36px;
-    font-weight: 600;
+    font-size: 45px;
+    font-weight: 800;
   }
 }
 
@@ -863,4 +865,7 @@ pre .copy-to-clipboard {
   margin-bottom: 0 !important;
   font-size: 100%;
 }
-/*# sourceMappingURL=style.css.map */
+
+img {
+  pointer-events: none;
+}

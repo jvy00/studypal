@@ -23,48 +23,61 @@
 
 </head>
 <body>
-    <header class="sticky-top navigation navbar-dark px-5">
-        <div class="container-fluid">
-          <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand text-light" href="{{ url_for('views.home') }}">
-              <!-- <img src="/" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
-              <i class="bi bi-chat-square-heart" style="font-size: 30px;"></i>
-              StudyPal
-            </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-expanded="false">
-              <i class="ti-align-right h4 text-light"></i>
-            </button>
-            <div class="collapse navbar-collapse text-center" id="navigation">
-              <ul class="navbar-nav mx-auto align-items-center">
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('views.home') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('views.studytools') }}">Study Tools</a>
-                </li>
+  <header class="sticky-top navigation navbar-dark px-5">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand text-light" href="{{ url_for('views.home') }}">
+            <!-- <img src="/" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+            <i class="bi bi-chat-square-heart" style="font-size: 30px;"></i>
+            StudyPal
+          </a>
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-expanded="false">
+            <i class="ti-align-right h4 text-light"></i>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav mx-auto align-items-center">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('views.home') }}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('views.studytools') }}">Study Tools</a>
+              </li>
               {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="search.html">Search Page</a>
-                </li>
-              </ul>
+              <li class="nav-item">
+                <a class="nav-link" href="search.html">Search Page</a>
+              </li>
+            </ul>
+
+            <!-- Right-aligned nav items -->
+            <ul class="navbar-nav ms-auto align-items-center">
               <li class="nav-item dropdown list-unstyled">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#!">Action</a>
-                    <a class="dropdown-item" href="#!">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" id="logout" href="/logout">Logout</a>
-                </div>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#!">Account</a>
+                  <a class="dropdown-item" href="#!">Settings</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" id="logout" href="/logout">Logout</a>
+                </ul>
               </li>
+
               {% else %}
-              <a href="{{ url_for('auth.register') }}" class="btn btn-sm btn-outline-primary ms-lg-4">Sign Up</a>
-              <a href="{{ url_for('auth.login') }}" class="btn btn-sm btn-primary ms-lg-4">Login</a>
+              <!-- Sign Up and Login buttons -->
+              <li class="nav-item">
+                <a href="{{ url_for('auth.signup') }}" class="btn btn-sm btn-outline-primary ms-lg-4">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-sm btn-primary ms-lg-4">Login</a>
+              </li>
               {% endif %}
-              <button id="darkModeToggle" class="btn btn-sm btn-outline-secondary ms-lg-4" aria-label="Toggle Dark Mode"><i class="bi bi-moon-stars-fill"></i></button>
-            </div>
-          </nav>
-        </div>
-    </header>
+              <li class="nav-item">
+                <button id="darkModeToggle" class="btn btn-sm btn-outline-secondary ms-lg-4" aria-label="Toggle Dark Mode" title="Enter Dark Mode"><i class="bi bi-cloud-sun-fill"></i></button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+  </header>
     
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -90,20 +103,16 @@
     <footer>
         <div class="container">
           <div class="row align-items-center border-bottom py-5">
-            <div class="col-lg-4">
-              <ul class="list-inline footer-menu text-center text-lg-left">
-                <li class="list-inline-item"><a href="contact.html">Contact Us</a></li>
-                <li class="list-inline-item"><a href="search.html">Search</a></li>
-              </ul>
-            </div>
-            <div class="col-lg-4 text-center mb-4 mb-lg-0">
-              <a class="navbar-brand" href="{{ url_for('views.home') }}">
-                <img class="img-fluid" src="{{ url_for('static', filename='/images/logo.png') }}" alt="Hugo documentation theme">
-              </a>
-            </div>
           </div>
           <div class="py-4 text-center">
-            <small class="text-light">Copyright © 2020 a hugo theme by <a href="https://themefisher.com">themefisher</a></small>
+            <div class="mb-4 mb-lg-0">
+              <a class="navbar-brand" href="{{ url_for('views.home') }}">
+                <i class="bi bi-chat-square-heart" style="font-size: 30px;"></i>
+                  <h3>StudyPal</h3>
+               <!-- <img class="img-fluid" src="{{ url_for('static', filename='/images/logo.png') }}" alt="StudyPal"> -->
+              </a>
+            </div>
+            <small class="text-dark">Copyright © 2025 StudyPal</small>
           </div>
         </div>
     </footer>
@@ -121,23 +130,30 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const toggleButton = document.getElementById('darkModeToggle');
+            const toggleDark = document.getElementById('darkModeToggle');
             const body = document.body;
+            const icon = toggleDark.querySelector('i'); // select the icon inside the button
     
-            // Apply dark mode if saved in localStorage
+            // apply dark mode if saved in localStorage
             if (localStorage.getItem('darkMode') === 'enabled') {
                 body.classList.add('dark-mode');
+                icon.className = 'bi-moon-fill'
             }
     
-            toggleButton.addEventListener('click', function () {
+            toggleDark.addEventListener('click', function () {
                 body.classList.toggle('dark-mode');
                 if (body.classList.contains('dark-mode')) {
                     localStorage.setItem('darkMode', 'enabled');
+                    icon.className = 'bi-moon-stars-fill'
+                    this.setAttribute('title', 'Exit Dark Mode');
                 } else {
                     localStorage.setItem('darkMode', 'disabled');
+                    icon.className = 'bi-cloud-sun-fill'
+                    this.setAttribute('title', 'Enter Dark Mode');
                 }
             });
         });
     </script>
 
 </body>
+</html>
