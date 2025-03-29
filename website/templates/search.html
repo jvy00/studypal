@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+
+{% block css %}
+<style>
+    body.dark-mode {
+        background-color: #1a1a1dfa;
+        color: #ffffff;
+        
+        a, h1, h2, h3, h4, h5, h6 {
+            color: #bb86fc;
+        }
+    
+        
+        .list-group-item {
+            background-color: #585858;
+            color: #ffffff;
+        }
+
+    
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                {% if query %}
+                    <h2 class="mb-5 font-weight-medium">Search results for <span class="text-primary">{{ query }}</span></h2>
+                    {% if results %}
+                        <div class="p-5 shadow rounded">
+                            <ul class="list-group">
+                                {% for result in results %}
+                                    <li class="list-group-item">
+                                        <h5>{{ result.title }}</h5>
+                                        <p>{{ result.note_data[:100] }}...</p>
+                                        <a href="{{ url_for('views.show_notes', note_id=result.id) }}" class="btn btn-sm btn-primary">View Note</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="p-5 shadow rounded">
+                            <div class="text-center">
+                                <img class="img-fluid" src="{{ url_for('static', filename='images/no-search-found.png') }}" alt="No results found">
+                                <h3>No Results Found</h3>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <h2 class="mb-5 font-weight-medium">Please enter a search query.</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

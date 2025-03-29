@@ -10,11 +10,15 @@ views = Blueprint('views', __name__)
 def home():
     return render_template("home.html", user=current_user)
 
-@views.route('/study-tools')
+@views.route('/study-tools/notes')
 def studytools():
     return render_template("study-tools.html", user=current_user)
 
+@views.route('/coming-soon')
+def comingsoon():
+    return render_template("coming-soon.html", user=current_user)
 
+# route for notes (includes add, edit, delete and view notes)
 @views.route('/study-tools/notes/<int:note_id>', methods=['GET', 'POST'])
 @login_required
 def show_notes(note_id):
@@ -91,5 +95,33 @@ def edit_note(note_id):
     notes_list = Note.query.filter_by(user_id=current_user.id).all()
     return render_template("edit-note.html", user=current_user, notes=notes_list, current_note=note)     #this will render the edit_note.html and it will pass those variables to that html
 
+@views.route('study-tools/notes/delete/<int:note_id>', methods=['GET'])
+def delete_note(note_id):
+    note = Note.query.get(note_id)
+
+    if not note:
+        flash('Note not found', category='error')
+
+    else:
+        db.session.delete(note)
+        db.session.commit()
+        flash('Note Deleted!', category='success')
+    return redirect(url_for('views.studytools'))
 
 
+@views.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('s')  # get the search query from the URL parameter
+    results = []
+
+    if query and current_user.is_authenticated:
+        # search for notes containing the query
+        results = Note.query.filter(
+            (Note.title.ilike(f"%{query}%")) | (Note.note_data.ilike(f"%{query}%"))
+        ).filter_by(user_id=current_user.id).all()
+    
+    elif not current_user.is_authenticated:
+        flash('You need to be logged in to search notes', category='error')
+        return redirect(url_for('auth.login'))
+
+    return render_template('search.html', query=query, results=results, user=current_user)

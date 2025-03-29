@@ -34,11 +34,11 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('Thank you for coming!', category='success')
+    flash('You have been successfully logged out..', category='success')
     return redirect(url_for('auth.login'))
 
-@auth.route('/register', methods=['GET', 'POST'])
-def register():
+@auth.route('/signup', methods=['GET', 'POST'])
+def signup():
     if current_user.is_authenticated:
         return redirect(url_for('views.home'))
 
@@ -57,7 +57,7 @@ def register():
         elif len(username) < 2:
             flash('Username should be more than 1 character', category='error')
 
-        elif len(password) < 7:
+        elif len(password) < 6:
             flash('Password should be more than 6 characters', category='error')
             
         else:
@@ -73,4 +73,4 @@ def register():
             flash('Account created successfully!', category='success')
             return redirect(url_for('views.home'))
 
-    return render_template("register.html", user=current_user)
+    return render_template("sign-up.html", user=current_user)

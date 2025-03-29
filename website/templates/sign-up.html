@@ -8,22 +8,22 @@
 {% block content %}
 <!-- Registration 3 - Bootstrap Brain Component -->
 <section class="p-3 p-md-4 p-xl-5">
-    <div class="container">
+    <div class="container signup-card card">
       <div class="row">
-        <div class="col-12 col-md-6 bsb-tpl-bg-platinum">
+        <div class="col-12 col-md-6">
           <div class="d-flex flex-column justify-content-between h-100 p-3 p-md-4 p-xl-5">
             <h3 class="m-0">Welcome!</h3>
-            <img class="img-fluid rounded mx-auto my-4" loading="lazy" src="../static/images/logo.png " width="245" height="80" alt="BootstrapBrain Logo">
-            <p class="mb-0">Not a member yet? <a href="{{ url_for('auth.register') }}" class="link-secondary text-decoration-none">Register now</a></p>
+            <img src="{{ url_for('static', filename='images/study.png') }}" class="img-fluid" alt="Welcome">
+            <p class="mb-0">Not a member yet? <a href="{{ url_for('auth.signup') }}" class="link-secondary text-decoration-none">Sign up now</a></p>
           </div>
         </div>
-        <div class="col-12 col-md-6 bsb-tpl-bg-lotion">
+        <div class="col-12 col-md-6">
           <div class="p-3 p-md-4 p-xl-5">
             <div class="row">
               <div class="col-12">
                 <div class="mb-5">
-                  <h2 class="h3">Registration</h2>
-                  <h3 class="fs-6 fw-normal text-secondary m-0">Enter your details to register</h3>
+                  <h2 class="h3">Create your Account</h2>
+                  <h3 class="fs-6 fw-normal text-secondary m-0">Enter your details</h3>
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-12">
                   <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                  <input type="password" class="form-control" name="password" id="password" value="" required>
+                  <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
@@ -59,22 +59,7 @@
             <div class="row">
               <div class="col-12">
                 <hr class="mt-5 mb-4 border-secondary-subtle">
-                <p class="m-0 text-secondary text-end">Already have an account? <a href="{{ url_for('auth.login') }}" class="link-primary text-decoration-none">Sign in</a></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <p class="mt-5 mb-4">Or sign in with</p>
-                <div class="d-flex gap-3 flex-column flex-xl-row">
-                  <a href="#!" class="btn bsb-btn-xl btn-outline-primary">
-                    <i class="bi bi-google"></i>
-                    <span class="ms-2 fs-6">Google</span>
-                  </a>
-                  <a href="#!" class="btn bsb-btn-xl btn-outline-primary">
-                    <i class="bi bi-twitter"></i>
-                    <span class="ms-2 fs-6">Twitter</span>
-                  </a>
-                </div>
+                <p class="m-0 text-secondary text-end">Already have an account? <a href="{{ url_for('auth.login') }}" class="link-primary text-decoration-none">Log in</a></p>
               </div>
             </div>
           </div>
