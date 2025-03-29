@@ -57,7 +57,7 @@ def signup():
         elif len(username) < 2:
             flash('Username should be more than 1 character', category='error')
 
-        elif len(password) < 7:
+        elif len(password) < 6:
             flash('Password should be more than 6 characters', category='error')
             
         else:
