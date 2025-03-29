@@ -95,6 +95,19 @@ def edit_note(note_id):
     notes_list = Note.query.filter_by(user_id=current_user.id).all()
     return render_template("edit-note.html", user=current_user, notes=notes_list, current_note=note)     #this will render the edit_note.html and it will pass those variables to that html
 
+@views.route('study-tools/notes/delete/<int:note_id>', methods=['GET'])
+def delete_note(note_id):
+    note = Note.query.get(note_id)
+
+    if not note:
+        flash('Note not found', category='error')
+
+    else:
+        db.session.delete(note)
+        db.session.commit()
+        flash('Note Deleted!', category='success')
+    return redirect(url_for('views.studytools'))
+
 
 @views.route('/search', methods=['GET'])
 def search():

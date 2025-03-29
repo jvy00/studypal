@@ -11,6 +11,12 @@
     background-color: #f3f3f3;
     min-height: 80vh;
   }
+  .bi-trash:hover {
+    color: rgb(204, 9, 9);
+  }
+  .bi-trash {
+    color: rgb(153, 14, 14);
+  }
 </style>
 
 {% endblock %}
@@ -46,7 +52,9 @@
             <!-- main content -->
           {% if current_note %}
             <h3 class="font-weight-medium" id="note-title">{{ current_note.title }}
-              <a href="{{ url_for('views.edit_note', note_id=current_note.id) }}"><i class="bi bi-pencil-fill float-end"></i></a></h3>
+              <a href="{{ url_for('views.delete_note', note_id=current_note.id) }}"><i class="bi bi-trash float-end ps-3" style="font-size: 20px;"></i>
+              <a href="{{ url_for('views.edit_note', note_id=current_note.id) }}"><i class="bi bi-pencil-fill float-end" style="font-size: 20px;"></i>
+              </a></h3>
             <div class="content" id="note-content">
               <pre class="text-break">{{ current_note.note_data }}</pre>
               <!-- navigation -->
